@@ -14,8 +14,6 @@ app.get("/users", async (req, resp) => {
 
 app.get("/users/:id", async (req, resp) => {
   let id: number = +req.params.id;
-  // let idw: number = parseInt(req.params.id, 10);
-  // let id: number = Number(req.params.id);
   let user = await findById(id);
   resp.send(user);
 });
@@ -27,15 +25,14 @@ app.post("/users", async (req, resp) => {
 });
 
 app.patch("/users/:id", async (req, resp) => {
-  let id: number = Number(req.params.id);
+  let id: number = +req.params.id;
   let user = req.body;
   user = await update(id, user);
-  console.log("User Id:" + id);
   resp.send(user);
 });
 
 app.delete("/users/:id", async (req, resp) => {
-  let id: number = Number(req.params.id);
+  let id: number = +req.params.id;
   await remove(id);
   resp.send({ status: "OK" });
 });
